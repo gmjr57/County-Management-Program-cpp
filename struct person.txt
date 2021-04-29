@@ -1,9 +1,9 @@
 struct person{  // define the UDT 
     
     string pName;
-    long pSSN; 
-
     char gender; 
+    
+    long pSSN;
     string DOB;
     
     float height; 
