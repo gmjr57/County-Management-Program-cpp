@@ -1,0 +1,12 @@
+1. display_list
+2. remove_person
+3. add_person
+4. add_group
+5. change_info
+6. social_check
+7. cardio_check
+8. get_ratio
+9. find_parents
+10. find_children
+11. find_siblings
+12. find_exfamily
