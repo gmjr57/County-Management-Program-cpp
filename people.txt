@@ -14,7 +14,7 @@ M
 142.09
 876106807
 840636785
-Maya Murray	
+Maya Murray
 F
 198992080
 11/28/2016
@@ -22,7 +22,7 @@ F
 105.44
 941351564
 144224990
-Audrey Riley	
+Audrey Riley
 F
 756945542
 09/05/1977
@@ -30,7 +30,7 @@ F
 98.09
 972688791
 781253718
-Edith Chapman	
+Edith Chapman
 F
 356808421
 01/12/1979
@@ -38,23 +38,23 @@ F
 169.14
 212887952
 767654789
-Audrey Phillips	
-F	
+Audrey Phillips
+F
 830826427
 01/06/1961
 66.31
 111.29
 237159239
 281563641
-Fiona Douglas	
-F	
+Fiona Douglas
+F
 702459528
 03/17/1970
 53.77
 162.32
 395095283
 281299575
-Adam Davis	
+Adam Davis
 M
 656073252
 08/21/1965
@@ -62,7 +62,7 @@ M
 186.61
 243079314
 754842643
-Adison Johnson	
+Adison Johnson
 M
 216712470
 10/11/1957
@@ -70,7 +70,7 @@ M
 124.09
 360460864
 268588007
-Heather	Morgan	
+Heather	Morgan
 F
 991455582
 03/31/1952
@@ -78,7 +78,7 @@ F
 186.35
 708588630
 758515504
-Eddy Nelson	
+Eddy Nelson
 M
 093807119
 09/25/1940
@@ -86,7 +86,7 @@ M
 123.45
 494751242
 224969994
-Carina Payne	
+Carina Payne
 F
 501257398
 03/05/1996
@@ -94,7 +94,7 @@ F
 176.23
 529665757
 338579363
-Charlotte Armstrong	
+Charlotte Armstrong
 F
 356623085
 12/10/1958
@@ -102,7 +102,7 @@ F
 137.37
 523641191
 395604257
-Aldus Johnston	
+Aldus Johnston
 M
 350394501
 03/31/1978
@@ -110,7 +110,7 @@ M
 201.57
 784594898
 828859760
-Nicole Harris	
+Nicole Harris
 F
 835069913
 01/11/1969
@@ -126,7 +126,7 @@ M
 131.91
 539012288
 330528469
-Aston Sullivan	
+Aston Sullivan
 M
 969530047
 03/21/1945
@@ -134,15 +134,15 @@ M
 124.70
 763819011
 398899780
-Adele Crawford	
-F	
+Adele Crawford
+F
 381139071
 03/11/2017
 80.63
 206.77
 590310165
 722084082
-Victor Farrell	
+Victor Farrell
 M
 087463256
 11/09/1979
