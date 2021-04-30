@@ -70,7 +70,7 @@ int main()
 
     // check to see if linked list is correct
     /*while (current != NULL){
-        cout << current->pName << " | " << current->fSSN << " | " << current->gender << " | " << current->DOB << " | " 
+        cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
         << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
         current = current->next; 
     } */
