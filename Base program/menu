@@ -1,0 +1,79 @@
+/******************************************************************************
+
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+int main()
+{
+for(int x = 10;x>9;x++)
+{
+  int selection;
+  cout<<"\n Menu";
+  cout<<"\n+-------------------------------------------------------------+";
+  cout<<"\n|+-----------------------------------------------------------+|";
+  cout<<"\n||  1 - Display the people                                   ||";
+  cout<<"\n||  2 - Prompt for removing a person                         ||";
+  cout<<"\n||  3 - Prompt for adding a person                           ||";
+  cout<<"\n||  4 - Add new people to list in bulk from supplemetary file||";
+  cout<<"\n||  5 - Edit a person                                        ||";
+  cout<<"\n||  6 - Display all people eligible for social security      ||";
+  cout<<"\n||  7 - Display all people at risk of cardiovascular disease ||";
+  cout<<"\n||  8 - Display the male:female ratio of the population      ||";
+  cout<<"\n||  9 - Find the parents of a person                         ||";
+  cout<<"\n|| 10 - Find all children of a person                        ||";
+  cout<<"\n|| 11 - Find all siblings of a person                        ||";
+  cout<<"\n|| 12 - Find all extended family of a person                 ||";
+  cout<<"\n|| 99 - Exit                                                 ||";
+  cout<<"\n|+-----------------------------------------------------------+|";
+  cout<<"\n+-------------------------------------------------------------+";
+  cout<<"\n Enter selection: ";
+
+  // read the input
+
+  cin>>selection;
+
+ 
+
+  switch(selection)
+  {
+    case 1 :{cout<<"\n #1 works\n";}
+    break;
+    case 2 :{cout<<"\n #2 works";}
+    break;
+    case 3 :{cout<<"\n #3 works";}
+    break;
+    case 4 :{cout<<"\n #4 works";}
+    break;
+    case 5 :{cout<<"\n #5 works";}
+    break;
+    case 6 :{cout<<"\n #6 works";}
+    break;
+    case 7 :{cout<<"\n #7 works";}
+    break;
+    case 8 :{cout<<"\n #8 works";}
+    break;
+    case 9 :{cout<<"\n #9 works";}
+    break;
+    case 10 :{cout<<"\n #10 works";}
+    break;
+    case 11 :{cout<<"\n #11 works";}
+    break;
+    case 12 :{cout<<"\n #12 work";}
+    break; 
+    case 99 :{cout<<"\n #99 works";return 0;}
+    break;
+
+
+    default : cout<<"\n Invalid selection";
+
+  // no break in the default case
+
+  }
+  }
+cout<<"\n";
+
+ 
+
+return 0;
+
+}
