@@ -3,6 +3,19 @@
 *******************************************************************************/
 #include <iostream>
 using namespace std;
+struct person{  // define the UDT 
+    string pName;
+    char gender; 
+    long pSSN;
+    string DOB;
+    float height; 
+    float weight;
+    long fSSN;
+    long mSSN;
+    person* next;
+};
+
+
 int main()
 {
 for(int x = 10;x>9;x++)
