@@ -1,1 +1,17 @@
-
+case 7 :
+            {cout<<"\n People At Risk Of Cardiovascular Disease";
+             cout<<"\n==========================================\n";
+                for (int x=0;x<pcount;x++)
+                 {
+                    int BMI = (current->weight / (current->height * current->height)*703);
+                    if (BMI >= 27)
+                    {
+                    cout<< current->pName<<endl;
+                    }
+                    //weight (lb) / [height (in)]2 x 703
+                    current = current->next;
+                    // cout<<"step1 works"; 
+                    
+                 } 
+                
+            }
