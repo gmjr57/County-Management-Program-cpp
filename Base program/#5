@@ -1,1 +1,180 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+struct person{  // define the UDT 
+    string pName;
+    char gender; 
+    long pSSN;
+    string DOB;
+    float height; 
+    float weight;
+    long fSSN;
+    long mSSN;
+    person* next;
+};
 
+bool change_info(person*);
+int main()
+{
+    
+    person* head = new person; // independent person 
+    head->next = NULL; 
+    
+    person* current = head; person* newPerson ;  
+    // assign data values 
+    string fLine;
+    ifstream fPeople;
+    fPeople.open("people.txt"); 
+    
+    while (!fPeople.eof())
+    {
+        getline( fPeople, fLine); 
+        current->pName = fLine;
+        getline( fPeople, fLine); 
+        current->gender = fLine[0];
+        getline( fPeople, fLine); 
+        current->pSSN = stol(fLine);
+        getline( fPeople, fLine); 
+        current->DOB = fLine;
+        getline( fPeople, fLine); 
+        current->height = stof(fLine);
+        getline( fPeople, fLine); 
+        current->weight = stof(fLine);
+        getline( fPeople, fLine); 
+        current->fSSN = stol(fLine);
+        getline( fPeople, fLine); 
+        current->mSSN = stol(fLine);
+        
+        newPerson = new person; // independent person 
+        current->next = newPerson; // linking persons 
+        current = newPerson; 
+    }
+    
+    fPeople.close(); 
+    
+    current = head; person* prevPerson ;  
+    while (current->next != NULL)
+    {  // (current != null) vs. (current->next != NULL)
+        prevPerson = current;
+        current = current->next;
+    } 
+    
+    prevPerson->next = NULL; 
+    delete newPerson; 
+    current = head; 
+
+
+    for(int x = 10;x>9;x++)
+    {
+        int selection;
+        cout<<"\n Menu";
+        cout<<"\n+---------------------------------------------------------------+";
+        cout<<"\n|***************************************************************|";
+        cout<<"\n|*+-----------------------------------------------------------+*|";
+        cout<<"\n|*|  1 - Display the people                                   |*|";
+        cout<<"\n|*|  2 - Prompt for removing a person                         |*|";
+        cout<<"\n|*|  3 - Prompt for adding a person                           |*|";
+        cout<<"\n|*|  4 - Add new people to list in bulk from supplemetary file|*|";
+        cout<<"\n|*|  5 - Edit a person                                        |*|";
+        cout<<"\n|*|  6 - Display all people eligible for social security      |*|";
+        cout<<"\n|*|  7 - Display all people at risk of cardiovascular disease |*|";
+        cout<<"\n|*|  8 - Display the male:female ratio of the population      |*|";
+        cout<<"\n|*|  9 - Find the parents of a person                         |*|";
+        cout<<"\n|*| 10 - Find all children of a person                        |*|";
+        cout<<"\n|*| 11 - Find all siblings of a person                        |*|";
+        cout<<"\n|*| 12 - Find all extended family of a person                 |*|";
+        cout<<"\n|*| 99 - Exit                                                 |*|";
+        cout<<"\n|*+-----------------------------------------------------------+*|";
+        cout<<"\n|***************************************************************|";
+        cout<<"\n+---------------------------------------------------------------+";
+        cout<<"\n Enter selection: ";
+
+  // read the input
+
+        cin>>selection;
+
+ 
+
+        switch(selection)
+        {
+            case 1 :{cout<<"\n #1 works\n";}
+            break;
+            case 2 :{cout<<"\n #2 works";}
+            break;
+            case 3 :{cout<<"\n #3 works";}
+            break;
+            case 4 :{cout<<"\n #4 works";}
+            break;
+            case 5 :{cout<<"\n #5 works" << endl;
+                change_info(head);
+            }
+            break;
+            case 6 :{cout<<"\n #6 works";}
+            break;
+            case 7 :{cout<<"\n #7 works";}
+            break;
+            case 8 :{cout<<"\n #8 works";}
+            break;
+            case 9 :{cout<<"\n #9 works";}
+            break;
+            case 10 :{cout<<"\n #10 works";}
+            break;
+            case 11 :{cout<<"\n #11 works";}
+            break;
+            case 12 :{cout<<"\n #12 work";}
+            break; 
+            case 99 :{cout<<"\n #99 works";return 0;}
+            break;
+
+
+            default : cout<<"\n Invalid selection";
+        }
+  // no break in the default case
+
+    }
+    cout<<"\n";
+
+return 0;
+
+}
+
+bool change_info(person* head) {
+    person* current = head;
+    int inp;
+    cout << "Please enter a SSN: " << endl;
+    cin >> inp;
+    cin.ignore();
+    
+    while (current != NULL) {
+        if (current->pSSN == inp) {
+            string new_pName;
+            float new_height, new_weight;
+            cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
+        << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
+            
+            cout << "Please enter new name: ";
+            getline(cin, new_pName);
+            current->pName = new_pName;
+            
+            
+            cout << "Please enter new height: ";
+            cin >> new_height;
+            current->height = new_height;
+            
+            cout << "Please enter new weight: ";
+            cin >> new_weight;
+            current->weight = new_weight;
+            
+            cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
+        << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
+        
+        cout << "Info Successfully Changed!" << endl;
+            return true;
+        }
+        current = current->next;
+    }
+    cout << "SSN Not Found" << endl;
+    return false;
+    
+}
