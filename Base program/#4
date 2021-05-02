@@ -20,7 +20,7 @@ struct person{  // define the UDT
     person* next;
 };
 
-void add_group(person*, ifstream&);
+void add_group(person**, person*, ifstream&);
 int main(){
     
     person* head = new person; // independent person 
@@ -118,10 +118,36 @@ int main(){
             case 3 :{cout<<"\n #3 works";}
             break;
             case 4 :{cout<<"\n #4 works" << endl;
+            ifstream file;
+            file.open("newpeople.txt");
             string line;
-            ifstream initialfile2;
-            initialfile2.open("newpeople.txt");
-            add_group(head, initialfile2);}
+            while (!file.eof()) {
+                getline(file, line);
+                current->pName = line;
+                getline(file, line);
+                current->gender = line[0];
+                getline(file, line);
+                current->pSSN = stol(line);
+                getline(file, line);
+                current->DOB = line;
+                getline(file, line);
+                current->height = stof(line);
+                getline(file, line);
+                current->weight = stof(line);
+                getline(file, line);
+                current->fSSN = stol(line);
+                getline(file, line);
+                current->mSSN = stol(line);
+                
+                add_group(&head, newPerson, file);
+            }
+            file.close();
+             while (current != NULL){
+        cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
+        << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
+        current = current->next; 
+            } 
+            }
             break;
             case 5 :{cout<<"\n #5 works";}
             break;
@@ -150,74 +176,27 @@ int main(){
     }
     cout<<"\n";
 
-return 0;
-
+    return 0;
+    
 }
 
-/*void add_group(ofstream& mergeFile, ifstream& file1, ifstream& file2) {
-    string line;
-    if(!file1.eof() && !file2.eof()) {
-        while(getline(file1, line)) {
-            mergeFile << line << '\n'; 
-        }
-        
-        while(getline(file2, line)) {
-            mergeFile << line << '\n';
-        }
-        
-        cout << "Merge Complete" << endl;
-        
-    } else {
-        cout << "Merge failed" << endl;
-    }*/
-    
-void add_group(person* head, ifstream& file2) {
-    string line;
-    
-    person* current = head; person* new_individual;
-    
-    while (!file2.eof()) {
-        
-        getline(file2, line);
-        current->pName = line;
-        
-        getline(file2, line);
-        current->gender = line[0];
-        
-        getline(file2, line);
-        current->pSSN = stol(line);
-        
-        getline(file2, line);
-        current->DOB = line;
-        
-        getline(file2, line);
-        current->height = stof(line);
-        
-        getline(file2, line);
-        current->weight = stof(line);
-        
-        getline(file2, line);
-        current->fSSN = stol(line);
-        
-        getline(file2, line);
-        current->mSSN = stol(line);
-        
-        new_individual = new person; // independent person 
-        current->next = new_individual; // linking persons
-        current = new_individual;
+void add_group(person** head, person* newPerson, ifstream& file) {
+    person* current = *head;
+    newPerson = new person;
+    person *last = *head;
+    /*current->next = newPerson;
+    current = newPerson;
+    newPerson->next = NULL;
+    delete newPerson;*/
+    while (last->next != NULL)  {
+        last = last->next;  
     }
+    // 6. Change the next of last node 
+    last->next = newPerson;  
     
-    file2.close();
-    
-    current = head; person* prev_individual;
-     while (current->next != NULL)
-    { 
-        prev_individual = current;
-        current = current->next;
+    while (current != NULL){
+        cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
+        << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
+        current = current->next; 
     } 
-    
-    prev_individual->next = NULL; 
-    delete new_individual; 
-    current = head; 
-    cout << "Linked List completed" << endl;
 }
