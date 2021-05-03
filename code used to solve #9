@@ -87,6 +87,7 @@ int main()
         for(int j = i + 1; j < pcount; j++) 
         {
             // issue is that the current output only displays two children at a time. Attempt at an array did not work.
+            // Since "if statement" only accounts for two instances of mSSN and fSSN, it can only process and display two children.
             if ((client[i].fSSN == client[j].fSSN || client[i].mSSN == client[j].mSSN) 
             && client[i].fSSN != 0 && client[j].fSSN != 0 
             && client[i].mSSN != 0 && client[j].mSSN != 0) 
