@@ -1,5 +1,5 @@
 /******************************************************************************
-WILCOX, ALEXANDER       MAR. 15, 2021.       Homework 7. Assignment 2.
+WILCOX, ALEXANDER       The code I'm adjusting to fit objective #9.
 *******************************************************************************/
 #include <iostream>  // console input and output.
 #include <fstream>   // file input and output.
@@ -16,21 +16,16 @@ struct person
     float height;     // person's height.
     float weight;     // person's weight.
     
-    string father;    // father's name.
     long fSSN;       // father's SSN.
-    
-    string mother;    // mother's name.
     long mSSN;       // mother's SSN.
 };
-
-float get_RBMI(int, int, person[]); // function prototype for calculating RBMI.
 
 int main()
 {
     // function opening.
     cout << "Hello! Welcome to the same parent and child finding program. The current list of people and their information are: ";
     cout << endl << endl;
-    string fSSN = "fakePeople.txt";  string fLine; // file name and file lines are declared.
+    string fSSN = "people.txt";  string fLine; // file name and file lines are declared.
     
     int totalcount = 0;
     int linecount = 0;                              // obtains the amount of lines in the file.    
@@ -67,10 +62,8 @@ int main()
     
     getline(fauxPerson, fLine); client[pcount].weight = stof(fLine);
     
-    getline(fauxPerson, fLine); client[pcount].father = fLine;
     getline(fauxPerson, fLine); client[pcount].fSSN = stol(fLine);
     
-    getline(fauxPerson, fLine); client[pcount].mother = fLine;
     getline(fauxPerson, fLine); client[pcount].mSSN = stol(fLine);
 
     pcount++; // pcount represents how many people the file has. Increases everytime a person's information is inputted.
@@ -81,17 +74,18 @@ int main()
     {
         cout << client[i].pname << " | " << client[i].SSN 
         << " | " << client[i].gender << " | " << client[i].DOB << " | " 
-        << client[i].height << " inches" << " | " << client[i].weight << " pounds" << " | " 
-        << client[i].father << " | " << client[i].fSSN << " | " 
-        << client[i].mother << " | " << client[i].mSSN << " | " << endl;
+        << client[i].height << " inches" << " | " << client[i].weight << " pounds" << " | "
+        << client[i].fSSN << " | " << client[i].mSSN << " | " << endl;
     }
 
     int index1, index2; // indx1 used to store a person's line of information associated with their SSN.
     cout << endl << "The current list of children and their parents are: " << endl;
 
-    for (int i = 0; i < pcount; i++) 
+    // "i" does not increments until the second for loop is complete. Each increment restarts the following for loop.
+    for (int i = 0; i < pcount; i++)
     {
-        for(int j = i + 1; j < pcount; j++)
+        // Since "i" doesn't change during this second for loop, it can easily check and pair up with the other numbers. 
+        for(int j = i + 1; j < pcount; j++) 
         {
             if ((client[i].fSSN == client[j].fSSN || client[i].mSSN == client[j].mSSN) 
             && client[i].fSSN != 0 && client[j].fSSN != 0 
@@ -100,8 +94,8 @@ int main()
                 index1 = i;
                 index2 = j;
                 
-                cout << "Parents: " << "| " << client[index1].father 
-                << " | " << client[index1].mother << " | " << endl;
+                cout << "Parents: " << "| " << client[index1].fSSN
+                << " | " << client[index1].mSSN << " | " << endl;
                 
                 cout << "Children: " << "| " << client[index1].pname << " | " <<
                 client[index1].gender << " | " << client[index2].pname << " | " <<
