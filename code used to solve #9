@@ -78,31 +78,24 @@ int main()
         << client[i].fSSN << " | " << client[i].mSSN << " | " << endl;
     }
 
-    int index1, index2; // indx1 used to store a person's line of information associated with their SSN.
     cout << endl << "The current list of children and their parents are: " << endl;
-
-    // "i" does not increments until the second for loop is complete. Each increment restarts the following for loop.
+    // removed index1 and index2 since their inclusion didn't change anything.
+    // "i" does not increment until the second for loop is complete. Each increment restarts the following for loop.
     for (int i = 0; i < pcount; i++)
     {
-        // Since "i" doesn't change during this second for loop, it can easily check and pair up with the other numbers. 
+        // Since "i" doesn't change during this second for loop, it completely checks the list for pairings with client[i].fSSN and client[i].mSSN.
         for(int j = i + 1; j < pcount; j++) 
         {
+            // issue is that the current output only displays two children at a time. Attempt at an array did not work.
             if ((client[i].fSSN == client[j].fSSN || client[i].mSSN == client[j].mSSN) 
             && client[i].fSSN != 0 && client[j].fSSN != 0 
-            && client[i].mSSN != 0 && client[j].mSSN != 0)
+            && client[i].mSSN != 0 && client[j].mSSN != 0) 
             {
-                index1 = i;
-                index2 = j;
-                
-                cout << "Parents: " << "| " << client[index1].fSSN
-                << " | " << client[index1].mSSN << " | " << endl;
-                
-                cout << "Children: " << "| " << client[index1].pname << " | " <<
-                client[index1].gender << " | " << client[index2].pname << " | " <<
-                client[index2].gender << endl << endl;
+                cout << "Father: " << client[i].fSSN << " | " << "Mother: " << client[i].mSSN << " | " << endl;
+                cout << "Children: " << "| " << client[i].pname << " | " << client[j].pname << " | " << endl << endl;
             }
         }
-    }
+    } 
     cout << "Thank you for using this program. Please try it again with new people!";
     return 0;
 }
