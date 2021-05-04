@@ -169,8 +169,8 @@ int get_ratio(person* head, int pcount)
             current = current->next;
             }    
             cout<<Male<<" Men";
-            cout<<" : "<<Female<< " Women";
-            
+            cout<<" : "<<Female<< " Women"<<endl;
+            cout<< "Females per thousand males: "<<(Female/Male) * 1000<<endl;
 }
 int cardio_check(person* head, int pcount)
 {
