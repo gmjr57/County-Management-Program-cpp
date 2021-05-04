@@ -5,6 +5,10 @@
 #include <fstream>
 #include <string>
 #include <time.h>
+#include <conio.h>
+#include <iomanip>
+#include <chrono>
+
 using namespace std;
 struct person{  // define the UDT 
     string pName;
@@ -17,16 +21,16 @@ struct person{  // define the UDT
     long mSSN;
     person* next;
 };
-
-
+int cardio_check(person*,int);
+int get_ratio(person*, int);
+int social_check(person*, int);
 int main()
 {
-    
     person* head = new person; // independent person 
     head->next = NULL; 
-    
     person* current = head; person* newPerson ;  
     // assign data values 
+    int pcount = 0;
     string fLine;
     ifstream fPeople;
     fPeople.open("people.txt"); 
@@ -53,6 +57,7 @@ int main()
         newPerson = new person; // independent person 
         current->next = newPerson; // linking persons 
         current = newPerson; 
+        pcount++;
     }
     
     fPeople.close(); 
@@ -69,14 +74,7 @@ int main()
     current = head; 
     cout << "Linked List completed" << endl;
 
-    // check to see if linked list is correct
-    /*while (current != NULL){
-        cout << current->pName << " | ";
-                // << current->pSSN << " | " << current->gender << " | \n"; //<< current->DOB << " | "; 
-        //<< current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
-        current = current->next; 
-    } */
-
+    
 
     for(int x = 10;x>9;x++)
     {
@@ -102,13 +100,8 @@ int main()
         cout<<"\n|***************************************************************|";
         cout<<"\n+---------------------------------------------------------------+";
         cout<<"\n Enter selection: ";
-
   // read the input
-
         cin>>selection;
-
- 
-
         switch(selection)
         {
             case 1 :{cout<<"\n #1 works\n";}
@@ -121,20 +114,24 @@ int main()
             break;
             case 5 :{cout<<"\n #5 works";}
             break;
-            case 6 :{cout<<"\n People Eligible for Social Security";
-                     cout<<"\n=====================================\n";
-                for(int x = 0;x<22;x++)
-                {
-                    cout <<current->pName<<current->DOB<<endl;
-                    current = current->next;
-                }
+            case 6 :
+            {cout<<"\n People Eligible for Social Security";
+             cout<<"\n=====================================\n";
+             social_check(head, pcount);
             }
             break;
-            case 7 :{cout<<"\n #7 works";}
+            case 7 :
+            {cout<<"\n People At Risk Of Cardiovascular Disease";
+             cout<<"\n==========================================\n";
+             cardio_check(head, pcount);
+            }
             break;
-            case 8 :{cout<<"\n #8 works";}
+            case 8 :
+            {cout<<"\nThe Male to Female\n";
+             cout<<"**********************\n";
+             get_ratio(head, pcount);
+            }
             break;
-            
             case 9 :{"\n #9 works";}
             break;
             case 10 :{cout<<"\n #10 works";}
@@ -145,49 +142,109 @@ int main()
             break; 
             case 99 :{cout<<"\n #99 works";return 0;}
             break;
-
-
             default : cout<<"\n Invalid selection";
         }
   // no break in the default case
-
     }
-    cout<<"\n";
-// float get_age(string){
-//     // string strDOB = "2001/05/18 13:10:00";
-
-//     time_t tDOB;
-//     int yy, month, dd, hh, mm, ss;
-//     struct tm tBase;
-//     const char *zStart = strDOB.c_str(); // char buffer 
-
-//     sscanf(zStart, "%d/%d/%d %d:%d:%d", &yy, &month, &dd, &hh, &mm, &ss); // pass char buf to sscanf function 
-//     tBase.tm_year = yy - 1900;
-//     tBase.tm_mon = month - 1;
-//     tBase.tm_mday = dd;
-//     tBase.tm_hour = hh;
-//     tBase.tm_min = mm;
-//     tBase.tm_sec = ss;
-//     tBase.tm_isdst = -1;
-
-//     tDOB = mktime(&tBase);
-
-//     cout << tDOB << endl;
-    
-//     time_t tCurrent; 
-//     time(&tCurrent);  /* get current time; same as: timer = time(NULL)  */
-
-//     long seconds = difftime(tCurrent,tDOB);
-
-//     cout << seconds << endl; 
-
-//     int years = seconds / (365.0 * 24.0 * 3600.0);
-
-//     // cout << years << endl;
-//     return years;
-    
-// }
-
+cout<<"\n";
 return 0;
-
+}
+int get_ratio(person* head, int pcount)
+{
+            person* current= head;
+            long Male=0;
+            long Female=0;
+            current = head;
+            for (int x=0;x<pcount;x++)
+            {
+                if (current->gender == 'M')
+                {
+                    Male++;
+                }
+                if (current-> gender =='F')
+                {
+                Female++;
+                }
+            // cout << current->gender<<endl;
+            current = current->next;
+            }    
+            cout<<Male<<" Men";
+            cout<<" : "<<Female<< " Women";
+            
+}
+int cardio_check(person* head, int pcount)
+{
+    person* current= head;
+    current = head;
+    for (int x=0;x<pcount;x++)
+     {
+        float W = current->weight;
+        float H = current->height;
+        int BMI;
+        BMI = (W / (H*H)*703);
+        if (BMI >= 27)
+        {
+        cout<< current->pName<<endl;
+        cout<<"   BMI:";
+        cout<< BMI << endl<<endl;
+        }
+        //weight (lb) / [height (in)]2 x 703
+        current = current->next;
+        BMI = 0;
+     } 
+}
+int social_check(person* head, int pcount)
+{
+     person* current= head;
+    current = head;
+            for (int x=0;x<pcount;x++)
+            {
+                string str = current->DOB;
+                string delim = "/";
+                int dd, mm, yyyy;
+                size_t pos;
+                pos = str.find(delim);
+                dd = stoi(str.substr(pos + 4, 2));
+                // dd = stoi();
+                mm = stoi(str.substr(pos + 1, 2));
+                pos = str.find(delim);
+                yyyy = stoi(str.substr(pos - 4,4));
+                // std::cout << yyyy<<' '<<mm<<' '<<dd<<endl<<endl;
+                // current=current->next;
+                time_t rawtime;
+                struct tm * timeinfo;
+                char buffer [80];
+                time (&rawtime);
+                timeinfo = localtime (&rawtime);
+                strftime (buffer,80,"%F",timeinfo);
+                string str1 = buffer;
+                // cout<<str1;
+                string delim1 = "-";
+                int dd1, mm1, yyyy1;
+                size_t pos1;
+                pos1 = str1.find(delim1);
+                dd1 = stoi(str1.substr(pos1 + 4, 2));
+                mm1 = stoi(str1.substr(pos1 + 1, 2));
+                pos1 = str1.find(delim1);
+                yyyy1 = stoi(str1.substr(pos1 - 4,4));
+                // std::cout <<yyyy1<<'-'<<mm1<<'-'<<dd1<<endl;
+                int years = (yyyy1 - yyyy) - 1;
+                if (mm1 >= mm)
+                {
+                    if (dd1 >=dd)
+                    {
+                        years++;
+                    }
+                }
+                // cout << years<<endl;
+                if (years >= 65)
+                {
+                    cout<<current->pName<<endl;
+                    cout<<"Age: "<< years<<endl;
+                }
+                current=current->next;
+                
+                
+                
+            }
 }
