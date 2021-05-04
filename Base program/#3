@@ -1,1 +1,277 @@
+/******************************************************************************
 
+*******************************************************************************/
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+
+struct person{  // define the UDT 
+    string pName;
+    char gender; 
+    long pSSN;
+    string DOB;
+    float height; 
+    float weight;
+    long fSSN;
+    long mSSN;
+    person* next;
+    
+};
+
+
+int main()
+{
+    
+    person* head = new person; // independent person 
+    head->next = NULL; 
+    
+    person* current = head; person* newPerson ;  
+    // assign data values 
+    string fLine;
+    ifstream fPeople;
+    fPeople.open("people.txt"); 
+    
+    while (!fPeople.eof())
+    {
+        getline( fPeople, fLine); 
+        current->pName = fLine;
+        getline( fPeople, fLine); 
+        current->gender = fLine[0];
+        getline( fPeople, fLine); 
+        current->pSSN = stol(fLine);
+        getline( fPeople, fLine); 
+        current->DOB = fLine;
+        getline( fPeople, fLine); 
+        current->height = stof(fLine);
+        getline( fPeople, fLine); 
+        current->weight = stof(fLine);
+        getline( fPeople, fLine); 
+        current->fSSN = stol(fLine);
+        getline( fPeople, fLine); 
+        current->mSSN = stol(fLine);
+        
+        newPerson = new person; // independent person 
+        current->next = newPerson; // linking persons 
+        current = newPerson; 
+    }
+    
+    fPeople.close(); 
+    
+    current = head; person* prevPerson ;  
+    while (current->next != NULL)
+    {  // (current != null) vs. (current->next != NULL)
+        prevPerson = current;
+        current = current->next;
+    } 
+    
+    prevPerson->next = NULL; 
+    delete newPerson; 
+    current = head; 
+    cout << "Linked List completed" << endl;
+
+    // check to see if linked list is correct
+   
+
+    for(int x = 10;x>9;x++)
+    {
+        int selection;
+        cout<<"\n Menu";
+        cout<<"\n+---------------------------------------------------------------+";
+        cout<<"\n|***************************************************************|";
+        cout<<"\n|*+-----------------------------------------------------------+*|";
+        cout<<"\n|*|  1 - Display the people                                   |*|";
+        cout<<"\n|*|  2 - Prompt for removing a person                         |*|";
+        cout<<"\n|*|  3 - Prompt for adding a person                           |*|";
+        cout<<"\n|*|  4 - Add new people to list in bulk from supplemetary file|*|";
+        cout<<"\n|*|  5 - Edit a person                                        |*|";
+        cout<<"\n|*|  6 - Display all people eligible for social security      |*|";
+        cout<<"\n|*|  7 - Display all people at risk of cardiovascular disease |*|";
+        cout<<"\n|*|  8 - Display the male:female ratio of the population      |*|";
+        cout<<"\n|*|  9 - Find the parents of a person                         |*|";
+        cout<<"\n|*| 10 - Find all children of a person                        |*|";
+        cout<<"\n|*| 11 - Find all siblings of a person                        |*|";
+        cout<<"\n|*| 12 - Find all extended family of a person                 |*|";
+        cout<<"\n|*| 99 - Exit                                                 |*|";
+        cout<<"\n|*+-----------------------------------------------------------+*|";
+        cout<<"\n|***************************************************************|";
+        cout<<"\n+---------------------------------------------------------------+";
+        cout<<"\n Enter selection: ";
+
+  // read the input
+
+        cin>>selection;
+
+ 
+
+        switch(selection)
+        {
+            case 1 :
+            {cout<<"\n #1 works\n";
+             
+             
+            person* index = NULL; int temp3, temp5, temp6, temp7, temp8, temp2; string temp, temp4;
+            while(current != NULL) {
+            index = current->next;
+                while(index!= NULL) {
+                    if(current->pSSN > index->pSSN) {
+
+                        temp = current->pName;
+                        current->pName = index->pName;
+                        index->pName = temp;
+                        
+                        temp2 = current->gender;
+                        current->gender = index->gender;
+                        index->gender = temp2;
+                        
+                        temp3 = current->pSSN;
+                        current->pSSN = index->pSSN;
+                        index->pSSN = temp3;
+                        
+                        temp4 = current->DOB;
+                        current->DOB = index->DOB;
+                        index->DOB = temp4;
+                        
+                        temp5 = current->height;
+                        current->height = index->height;
+                        index->height = temp5;
+                        
+                        temp6 = current->weight;
+                        current->weight = index->weight;
+                        index->weight = temp6;
+                        
+                        temp7 = current->fSSN;
+                        current->fSSN = index->fSSN;
+                        index->fSSN = temp7;
+                        
+                        temp8 = current->mSSN;
+                        current->mSSN = index->mSSN;
+                        index->mSSN = temp8;
+                    }    
+                    index = index->next;
+                }
+                current = current->next;
+            }
+            current = head;
+            cout << '\n';
+            
+            
+            while (current != NULL)
+            {
+            cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
+                << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
+                current = current->next; 
+            } 
+            current = head;}
+            break;
+            case 2 :{cout<<"\n #2 works";}
+            break;
+            case 3 :{cout<<"\n #3 works";
+            
+            
+            
+            person* head = new person; 
+            head->next = NULL; 
+    
+            person* current = head; person* newPerson ;  
+   
+            
+            string newName;
+            newPerson = new person; 
+            current->next = newPerson; 
+            current = newPerson;
+            
+            cout << "Please input First and Last Name: " << endl;
+            getline(cin, newName);
+            cin.ignore();
+            cout << newName << endl;
+            current->pName=newName;
+            
+           /* cout << "Please input Gender: " << endl;
+            cin >> gender >> endl;
+            
+            cout << "Please input social security number: " << endl;
+            cin >> pSSN; */
+            
+            break;
+            }
+            case 4 :{cout<<"\n #4 works";}
+            break;
+            case 5 :{cout<<"\n #5 works";}
+            break;
+            case 6 :{cout<<"\n #6 works";}
+            break;
+            case 7 :{cout<<"\n #7 works";}
+            break;
+            case 8 :{cout<<"\n #8 works";}
+            break;
+            case 9 :{cout<<"\n #9 works";}
+            break;
+            case 10 :{cout<<"\n #10 works";}
+            break;
+            case 11 :{cout<<"\n #11 works";}
+            break;
+            case 12 :{cout<<"\n #12 work";}
+            break; 
+            case 99 :{cout<<"\n #99 works";return 0;}
+            break;
+
+
+            default : cout<<"\n Invalid selection";
+        }
+  // no break in the default case
+
+    }
+    cout<<"\n";
+
+return 0;
+
+}
+
+
+void add_person(person* head){
+                
+            person* head = new person; 
+            head->next = NULL; 
+    
+            person* current = head; person* newPerson ;  
+   
+            
+            string newName;
+            newPerson = new person; 
+            current->next = newPerson; 
+            current = newPerson;
+            
+            cout << "Please input First and Last Name: " << endl;
+            getline(cin, newName);
+            cout << newName << endl;
+            
+            cout << "Please input Gender: " << endl;
+            getline(cin, gender);
+            cout << gender << endl;
+            
+            cout << "Please input social security number: " << endl;
+            getline(cin, pSSN);
+            cout << pSSN << endl;
+            
+            cout << "Please input date of birth: " << endl;
+            getline(cin, DOB);
+            cout << DOB << endl;
+            
+            cout << "Please input height: " << endl;
+            getline(cin, height);
+            cout << height << endl;
+            
+            cout << "Please input weight: " << endl;
+            getline(cin, weight);
+            cout << weight << endl; 
+            
+            cout << "Please input Father's SSN: " << endl;
+            getline(cin, fSSN);
+            cout << fSSN << endl; 
+            
+            cout << "Please input Mother's SSN: " << endl;
+            getline(cin, mSSN);
+            cout << mSSN << endl;
+}
