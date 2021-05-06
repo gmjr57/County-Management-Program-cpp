@@ -20,7 +20,7 @@ struct person{  // define the UDT
 
 int main()
 {
-    
+    int pcount = 0;
     person* head = new person; // independent person 
     head->next = NULL; 
     
@@ -32,23 +32,19 @@ int main()
     
     while (!fPeople.eof())
     {
-        getline( fPeople, fLine); 
-        current->pName = fLine;
-        getline( fPeople, fLine); 
-        current->gender = fLine[0];
-        getline( fPeople, fLine); 
-        current->pSSN = stol(fLine);
-        getline( fPeople, fLine); 
-        current->DOB = fLine;
-        getline( fPeople, fLine); 
-        current->height = stof(fLine);
-        getline( fPeople, fLine); 
-        current->weight = stof(fLine);
-        getline( fPeople, fLine); 
-        current->fSSN = stol(fLine);
-        getline( fPeople, fLine); 
-        current->mSSN = stol(fLine);
+        getline( fPeople, fLine); current->pName = fLine;
+        getline( fPeople, fLine); current->gender = fLine[0];
         
+        getline( fPeople, fLine); current->pSSN = stol(fLine);
+        getline( fPeople, fLine); current->DOB = fLine;
+        
+        getline( fPeople, fLine); current->height = stof(fLine);
+        getline( fPeople, fLine); current->weight = stof(fLine);
+        
+        getline( fPeople, fLine); current->fSSN = stol(fLine);
+        getline( fPeople, fLine); current->mSSN = stol(fLine);
+        
+        pcount++;
         newPerson = new person; // independent person 
         current->next = newPerson; // linking persons 
         current = newPerson; 
