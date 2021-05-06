@@ -4,9 +4,12 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <time.h>
+#include <conio.h>
+#include <iomanip>
+#include <chrono>
+
 using namespace std;
-
-
 struct person{  // define the UDT 
     string pName;
     char gender; 
@@ -17,18 +20,18 @@ struct person{  // define the UDT
     long fSSN;
     long mSSN;
     person* next;
-    
 };
-
-
+int cardio_check(person*,int);
+int get_ratio(person*, int);
+int social_check(person*, int);
+void display_list(person*);
 int main()
 {
-    
     person* head = new person; // independent person 
     head->next = NULL; 
-    
     person* current = head; person* newPerson ;  
     // assign data values 
+    int pcount = 0;
     string fLine;
     ifstream fPeople;
     fPeople.open("people.txt"); 
@@ -55,6 +58,7 @@ int main()
         newPerson = new person; // independent person 
         current->next = newPerson; // linking persons 
         current = newPerson; 
+        pcount++;
     }
     
     fPeople.close(); 
@@ -71,8 +75,7 @@ int main()
     current = head; 
     cout << "Linked List completed" << endl;
 
-    // check to see if linked list is correct
-   
+    
 
     for(int x = 10;x>9;x++)
     {
@@ -98,20 +101,162 @@ int main()
         cout<<"\n|***************************************************************|";
         cout<<"\n+---------------------------------------------------------------+";
         cout<<"\n Enter selection: ";
-
   // read the input
-
         cin>>selection;
-
- 
-
         switch(selection)
         {
-            case 1 :
-            {cout<<"\n #1 works\n";
-             
-             
-            person* index = NULL; int temp3, temp5, temp6, temp7, temp8, temp2; string temp, temp4;
+            case 1 :{cout<<"\n #1 works\n";
+            display_list(head);
+            break;}
+            
+            case 2 :{cout<<"\n #2 works";}
+            break;
+            case 3 :{cout<<"\n #3 works";}
+            break;
+            case 4 :{cout<<"\n #4 works";}
+            break;
+            case 5 :{cout<<"\n #5 works";}
+            break;
+            case 6 :
+            {cout<<"\n People Eligible for Social Security";
+             cout<<"\n=====================================\n";
+             social_check(head, pcount);
+            }
+            break;
+            case 7 :
+            {cout<<"\n People At Risk Of Cardiovascular Disease";
+             cout<<"\n==========================================\n";
+             cardio_check(head, pcount);
+            }
+            break;
+            case 8 :
+            {cout<<"\nThe Male to Female\n";
+             cout<<"**********************\n";
+             get_ratio(head, pcount);
+            }
+            break;
+            case 9 :{"\n #9 works";}
+            break;
+            case 10 :{cout<<"\n #10 works";}
+            break;
+            case 11 :{cout<<"\n #11 works";}
+            break;
+            case 12 :{cout<<"\n #12 work";}
+            break; 
+            case 99 :{cout<<"\n #99 works";return 0;}
+            break;
+            default : cout<<"\n Invalid selection";
+        }
+  // no break in the default case
+    }
+cout<<"\n";
+return 0;
+}
+int get_ratio(person* head, int pcount)
+{
+            person* current= head;
+            float Male=0;
+            float Female=0;
+            current = head;
+            for (int x=0;x<pcount;x++)
+            {
+                if (current->gender == 'M')
+                {
+                    Male++;
+                }
+                if (current-> gender =='F')
+                {
+                Female++;
+                }
+            // cout << current->gender<<endl;
+            current = current->next;
+            }    
+            cout<<Male<<" Men";
+            cout<<" : "<<Female<< " Women"<<endl;
+            cout<< "Females per thousand males: "<<(Female/Male) * 1000<<endl;
+           
+            
+}
+int cardio_check(person* head, int pcount)
+{
+    person* current= head;
+    current = head;
+    for (int x=0;x<pcount;x++)
+     {
+        float W = current->weight;
+        float H = current->height;
+        int BMI;
+        BMI = (W / (H*H)*703);
+        if (BMI >= 27)
+        {
+        cout<< current->pName<<endl;
+        cout<<"   BMI:";
+        cout<< BMI << endl<<endl;
+        }
+        //weight (lb) / [height (in)]2 x 703
+        current = current->next;
+        BMI = 0;
+     } 
+}
+int social_check(person* head, int pcount)
+{
+     person* current= head;
+    current = head;
+            for (int x=0;x<pcount;x++)
+            {
+                string str = current->DOB;
+                string delim = "/";
+                int dd, mm, yyyy;
+                size_t pos;
+                pos = str.find(delim);
+                dd = stoi(str.substr(pos + 4, 2));
+                // dd = stoi();
+                mm = stoi(str.substr(pos + 1, 2));
+                pos = str.find(delim);
+                yyyy = stoi(str.substr(pos - 4,4));
+                // std::cout << yyyy<<' '<<mm<<' '<<dd<<endl<<endl;
+                // current=current->next;
+                time_t rawtime;
+                struct tm * timeinfo;
+                char buffer [80];
+                time (&rawtime);
+                timeinfo = localtime (&rawtime);
+                strftime (buffer,80,"%F",timeinfo);
+                string str1 = buffer;
+                // cout<<str1;
+                string delim1 = "-";
+                int dd1, mm1, yyyy1;
+                size_t pos1;
+                pos1 = str1.find(delim1);
+                dd1 = stoi(str1.substr(pos1 + 4, 2));
+                mm1 = stoi(str1.substr(pos1 + 1, 2));
+                pos1 = str1.find(delim1);
+                yyyy1 = stoi(str1.substr(pos1 - 4,4));
+                // std::cout <<yyyy1<<'-'<<mm1<<'-'<<dd1<<endl;
+                int years = (yyyy1 - yyyy) - 1;
+                if (mm1 >= mm)
+                {
+                    if (dd1 >=dd)
+                    {
+                        years++;
+                    }
+                }
+                // cout << years<<endl;
+                if (years >= 65)
+                {
+                    cout<<current->pName<<endl;
+                    cout<<"Age: "<< years<<endl;
+                }
+                current=current->next;
+                
+                
+                
+            }
+}
+void display_list(person* head)
+{
+  person* current= head;
+  person* index = NULL; int temp3, temp5, temp6, temp7, temp8, temp2; string temp, temp4;
             while(current != NULL) {
             index = current->next;
                 while(index!= NULL) {
@@ -163,52 +308,5 @@ int main()
                 << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
                 current = current->next; 
             } 
-            current = head;}
-            break;
-            case 2 :{cout<<"\n #2 works";}
-            break;
-            case 3 :{cout<<"\n #3 works";}
-            
-           /* cout << "Please input First and Last Name: " << endl;
-            cin 
-            cout >> person* head pName >> endl;
-            
-            cout << "Please input Gender: " << endl;
-            cin >> gender >> endl;
-            
-            cout << "Please input social security number: " << endl;
-            cin >> pSSN; */
-            
-            break;
-            case 4 :{cout<<"\n #4 works";}
-            break;
-            case 5 :{cout<<"\n #5 works";}
-            break;
-            case 6 :{cout<<"\n #6 works";}
-            break;
-            case 7 :{cout<<"\n #7 works";}
-            break;
-            case 8 :{cout<<"\n #8 works";}
-            break;
-            case 9 :{cout<<"\n #9 works";}
-            break;
-            case 10 :{cout<<"\n #10 works";}
-            break;
-            case 11 :{cout<<"\n #11 works";}
-            break;
-            case 12 :{cout<<"\n #12 work";}
-            break; 
-            case 99 :{cout<<"\n #99 works";return 0;}
-            break;
-
-
-            default : cout<<"\n Invalid selection";
-        }
-  // no break in the default case
-
-    }
-    cout<<"\n";
-
-return 0;
-
+            current = head;  
 }
