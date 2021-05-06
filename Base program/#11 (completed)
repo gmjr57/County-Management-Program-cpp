@@ -1,6 +1,7 @@
 /******************************************************************************
 WILCOX, ALEXANDER 
-Objective #10 Find Children
+This contains code for objectives 9, 10, and 11.
+Objective #11 Find Siblings
 *******************************************************************************/
 #include <iostream>
 #include <fstream>
