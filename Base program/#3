@@ -20,6 +20,9 @@ struct person{  // define the UDT
     
 };
 
+person* addPerson(person**);    
+int userInput();
+
 
 int main()
 {
@@ -168,32 +171,9 @@ int main()
             case 2 :{cout<<"\n #2 works";}
             break;
             case 3 :{cout<<"\n #3 works";
-            
-            
-            
-            person* head = new person; 
-            head->next = NULL; 
-    
-            person* current = head; person* newPerson ;  
-   
-            
-            string newName;
-            newPerson = new person; 
-            current->next = newPerson; 
-            current = newPerson;
-            
-            cout << "Please input First and Last Name: " << endl;
-            getline(cin, newName);
-            cin.ignore();
-            cout << newName << endl;
-            current->pName=newName;
-            
-           /* cout << "Please input Gender: " << endl;
-            cin >> gender >> endl;
-            
-            cout << "Please input social security number: " << endl;
-            cin >> pSSN; */
-            
+            cout << "Function 3: Add New Person." << endl;
+            addPerson(&head);
+        
             break;
             }
             case 4 :{cout<<"\n #4 works";}
@@ -230,48 +210,69 @@ return 0;
 }
 
 
-void add_person(person* head){
-                
-            person* head = new person; 
-            head->next = NULL; 
-    
-            person* current = head; person* newPerson ;  
-   
-            
-            string newName;
-            newPerson = new person; 
-            current->next = newPerson; 
-            current = newPerson;
-            
-            cout << "Please input First and Last Name: " << endl;
-            getline(cin, newName);
-            cout << newName << endl;
-            
-            cout << "Please input Gender: " << endl;
-            getline(cin, gender);
-            cout << gender << endl;
-            
-            cout << "Please input social security number: " << endl;
-            getline(cin, pSSN);
-            cout << pSSN << endl;
-            
-            cout << "Please input date of birth: " << endl;
-            getline(cin, DOB);
-            cout << DOB << endl;
-            
-            cout << "Please input height: " << endl;
-            getline(cin, height);
-            cout << height << endl;
-            
-            cout << "Please input weight: " << endl;
-            getline(cin, weight);
-            cout << weight << endl; 
-            
-            cout << "Please input Father's SSN: " << endl;
-            getline(cin, fSSN);
-            cout << fSSN << endl; 
-            
-            cout << "Please input Mother's SSN: " << endl;
-            getline(cin, mSSN);
-            cout << mSSN << endl;
+//Add Person
+person* addPerson(person** head){                                                   //Menu Option 3
+    string usrInp;
+
+    cin.ignore();
+
+    int count = 0;
+
+    person* usrInpPerson = new person;
+
+    //entering information
+
+    cout << "Enter Name to Add (Format: First Last): ";
+    getline(cin, usrInp);
+    usrInpPerson -> pName = usrInp;
+    cout << "Enter SSN of Person (Format: XXXXXXXXX): ";
+    getline(cin, usrInp);
+    usrInpPerson -> pSSN = stol(usrInp);
+    cout << "Enter Gender of Person (Format: M/F Case Sensitive): ";
+    getline(cin, usrInp);
+    usrInpPerson -> gender = usrInp[0];
+    cout << "Enter DOB of Person (Format: yyyy/mm/dd): ";
+    getline(cin, usrInp);
+    usrInpPerson -> DOB = usrInp;
+    cout << "Enter Height of Person (Format: XX.XX): ";
+    getline(cin, usrInp);
+    usrInpPerson -> height = stof(usrInp);
+    cout << "Enter Weight of Person (Format: XXX.XX): ";
+    getline(cin, usrInp);
+    usrInpPerson -> weight = stof(usrInp);
+    cout << "Enter Mother SSN of Person (Format: XXXXXXXXX): ";
+    getline(cin, usrInp);
+    usrInpPerson -> mSSN = stol(usrInp);
+    cout << "Enter Father SSN of Person (Format: XXXXXXXXX): ";
+    getline(cin, usrInp);
+    usrInpPerson -> fSSN = stol(usrInp);
+
+    person* current = *head;
+
+    struct person** headPointer;
+
+    headPointer = head;
+
+    while(current -> next != NULL){
+        if(current -> pSSN < usrInpPerson -> pSSN){
+            if(current -> next -> pSSN > usrInpPerson -> pSSN){
+                person* prev = current;
+                usrInpPerson -> next = prev -> next;
+                prev -> next = usrInpPerson;
+                break;
+            }
+        } else{
+            usrInpPerson -> next = (*headPointer);
+            (*headPointer) = usrInpPerson;
+            break;
+        }
+        current = current -> next;
+    }
+    if(current -> next == NULL){
+        usrInpPerson -> next = NULL;
+        current -> next =usrInpPerson;
+    }
+    cout << "New Person has been added to the list!" << endl;
+    cout << "Person " << usrInpPerson -> pSSN << " added." << endl;
+    return *head;
 }
