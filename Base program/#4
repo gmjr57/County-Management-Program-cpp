@@ -21,7 +21,7 @@ struct person{  // define the UDT
 };
 
 void display_list(person*);
-void add_group(person*, person*, person*, person*, ifstream&);
+person* add_group(person**, ifstream&);
 
 int main(){
     
@@ -122,11 +122,8 @@ int main(){
             case 4 :{cout<<"\n #4 works" << endl;
                 ifstream fNewPeople;
                 fNewPeople.open("newpeople.txt");
+                add_group(&head, fNewPeople);
                 display_list(head);
-                add_group(head, current, newPerson, prevPerson, fNewPeople);
-                display_list(head);
-                current = head;
-                //display_list(head);
             }
             break;
             case 5 :{cout<<"\n #5 works";}
@@ -221,11 +218,21 @@ void display_list(person* head)
 
 
 
-void add_group(person *head, person *current, person *newPerson, person *prevPerson, ifstream& file) {
+person* add_group(person **head, ifstream& file) {
+    person* current = *head;
+    
+    while(current->next != NULL) {
+        current = current->next;
+    }
     
     string line;
     while (!file.eof())
     {
+        
+        person* newPerson = new person; // independent person 
+        current->next = newPerson; // linking persons 
+        current = newPerson; 
+        
         getline( file, line); 
         current->pName = line;
         getline( file, line); 
@@ -242,24 +249,12 @@ void add_group(person *head, person *current, person *newPerson, person *prevPer
         current->fSSN = stol(line);
         getline( file, line); 
         current->mSSN = stol(line);
-        
-        newPerson = new person; // independent person 
-        current->next = newPerson; // linking persons 
-        current = newPerson; 
     }
     
      file.close(); 
 
-    current = head;
+    current = *head;
 
-      
-    while (current->next != NULL)
-    {  // (current != null) vs. (current->next != NULL)
-        prevPerson = current;
-        current = current->next;
-    } 
-    
-    prevPerson->next = NULL; 
-    delete newPerson; 
-    current = head; 
+    cout << "Supplementary file added to linked list!" << endl;
+    return *head;
 }
