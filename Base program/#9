@@ -133,7 +133,6 @@ int main()
             case 99 :{cout<<"\n #99 works";return 0;}
             break;
 
-
             default : cout<<"\n Invalid selection";
         }
   // no break in the default case
@@ -149,7 +148,7 @@ void find_parents(int num, person* head, person* current)
     
     current = head; 
     long inputSSN;
-    cout << endl << "Please enter an SSN to find their parents: ";
+    cout << endl << "Please enter an SSN to find their parents. Type 99 to go back to the menu: ";
     cin >> inputSSN;
     person client[num];
 
@@ -168,6 +167,7 @@ void find_parents(int num, person* head, person* current)
                 else
                 cout << "Client: " << current->pName << " | Mother: " << current->mSSN << " | " << "Father: " << current->fSSN << " | " << endl;
             }
+        if (inputSSN == 99) break;
         current = current->next; 
     }
 }
