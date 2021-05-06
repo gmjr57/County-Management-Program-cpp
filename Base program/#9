@@ -151,23 +151,24 @@ void find_parents(int num, person* head, person* current)
     cout << endl << "Please enter an SSN to find their parents. Type 99 to go back to the menu: ";
     cin >> inputSSN;
     person client[num];
-
+    
+    long index1, index2;
+    string index3;
     while (current != NULL)
     {
         if (inputSSN == current->pSSN)
             {
-                if (current->mSSN == 0)
-                {
-                    cout << current->pName << " does not have a mother." << endl << " Father: " << current->fSSN << endl; continue;
-                }
-                if (current->fSSN == 0)
-                {
-                    cout << current->pName << " does not have a father." << endl << " Mother: " << current->mSSN << endl; continue;
-                }
-                else
-                cout << "Client: " << current->pName << " | Mother: " << current->mSSN << " | " << "Father: " << current->fSSN << " | " << endl;
+                index1 = current->mSSN;
+                index2 = current->fSSN;
+                index3 = current->pName;
             }
         if (inputSSN == 99) break;
         current = current->next; 
     }
+    
+    if (index1 == 0) cout << current->pName << " does not have a mother." << endl << " Father: " << current->fSSN << endl;
+    else if (index2 == 0) cout << current->pName << " does not have a father." << endl << " Mother: " << current->mSSN << endl;
+    else
+    cout << "Client: " << index3 << " | Mother: " << index1 << " | " << "Father: " << index2 << " | " << endl;
+
 }
