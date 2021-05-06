@@ -1,1 +1,293 @@
+/******************************************************************************
+Hunter Owings Course Project #12
+Find all uncles, aunts, cousins, nephews and nieces of a person (user supplies SSN of the person). 
 
+Group by generation, oldest first; display by age, oldest first. 
+
+(HINT: Find the parents of the person, then find all the siblings of each parent, then find the children of each sibling.)
+*******************************************************************************/
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+struct person{  // define the UDT 
+    string pName;
+    char gender; 
+    long pSSN;
+    string DOB;
+    float height; 
+    float weight;
+    long fSSN;
+    long mSSN;
+    person* next;
+};
+
+
+int main()
+{
+    
+    person* head = new person; // independent person 
+    head->next = NULL; 
+    
+    person* current = head; person* newPerson ;  
+    // assign data values 
+    string fLine;
+    ifstream fPeople;
+    fPeople.open("people.txt"); 
+    
+    while (!fPeople.eof())
+    {
+        getline( fPeople, fLine); 
+        current->pName = fLine;
+        getline( fPeople, fLine); 
+        current->gender = fLine[0];
+        getline( fPeople, fLine); 
+        current->pSSN = stol(fLine);
+        getline( fPeople, fLine); 
+        current->DOB = fLine;
+        getline( fPeople, fLine); 
+        current->height = stof(fLine);
+        getline( fPeople, fLine); 
+        current->weight = stof(fLine);
+        getline( fPeople, fLine); 
+        current->fSSN = stol(fLine);
+        getline( fPeople, fLine); 
+        current->mSSN = stol(fLine);
+        
+        newPerson = new person; // independent person 
+        current->next = newPerson; // linking persons 
+        current = newPerson; 
+    }
+    
+    fPeople.close(); 
+    
+    current = head; person* prevPerson ;  
+    while (current->next != NULL)
+    {  // (current != null) vs. (current->next != NULL)
+        prevPerson = current;
+        current = current->next;
+    } 
+    
+    prevPerson->next = NULL; 
+    delete newPerson; 
+    current = head; 
+    cout << "Linked List completed" << endl;
+
+    // check to see if linked list is correct
+    /*while (current != NULL){
+        cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
+        << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
+        current = current->next; 
+    } */
+
+
+    for(int x = 10;x>9;x++)
+    {
+        int selection;
+        cout<<"\n Menu";
+        cout<<"\n+---------------------------------------------------------------+";
+        cout<<"\n|***************************************************************|";
+        cout<<"\n|*+-----------------------------------------------------------+*|";
+        cout<<"\n|*|  1 - Display the people                                   |*|";
+        cout<<"\n|*|  2 - Prompt for removing a person                         |*|";
+        cout<<"\n|*|  3 - Prompt for adding a person                           |*|";
+        cout<<"\n|*|  4 - Add new people to list in bulk from supplemetary file|*|";
+        cout<<"\n|*|  5 - Edit a person                                        |*|";
+        cout<<"\n|*|  6 - Display all people eligible for social security      |*|";
+        cout<<"\n|*|  7 - Display all people at risk of cardiovascular disease |*|";
+        cout<<"\n|*|  8 - Display the male:female ratio of the population      |*|";
+        cout<<"\n|*|  9 - Find the parents of a person                         |*|";
+        cout<<"\n|*| 10 - Find all children of a person                        |*|";
+        cout<<"\n|*| 11 - Find all siblings of a person                        |*|";
+        cout<<"\n|*| 12 - Find all extended family of a person                 |*|";
+        cout<<"\n|*| 99 - Exit                                                 |*|";
+        cout<<"\n|*+-----------------------------------------------------------+*|";
+        cout<<"\n|***************************************************************|";
+        cout<<"\n+---------------------------------------------------------------+";
+        cout<<"\n Enter selection: ";
+
+  // read the input
+
+        cin>>selection;
+
+ 
+
+        switch(selection)
+        {
+            case 1 :{cout<<"\n #1 works\n";}
+            break;
+            case 2 :{cout<<"\n #2 works";}
+            break;
+            case 3 :{cout<<"\n #3 works";}
+            break;
+            case 4 :{cout<<"\n #4 works";}
+            break;
+            case 5 :{cout<<"\n #5 works";}
+            break;
+            case 6 :{cout<<"\n #6 works";}
+            break;
+            case 7 :{cout<<"\n #7 works";}
+            break;
+            case 8 :{cout<<"\n #8 works";}
+            break;
+            case 9 :{cout<<"\n #9 works";}
+            break;
+            case 10 :{cout<<"\n #10 works";}
+            break;
+            case 11 :{cout<<"\n #11 works";}
+            break;
+            case 12 :{cout<<"\n #12 work";}
+            break; 
+            case 99 :{cout<<"\n #99 works";return 0;}
+            break;
+
+
+            default : cout<<"\n Invalid selection";
+        }
+  // no break in the default case
+
+    }
+    cout<<"\n";
+
+return 0;
+
+}
+
+void find_exfamily(person* head, person* current, person* prevPerson, person* newPerson) {
+    
+    // person* index = NULL; int temp, temp3, temp5, temp6, temp7, temp8; string temp2, temp4;
+    // while(current != NULL) {
+    //     index = current->next;
+    //     while(index!= NULL) {
+    //             temp = current->pSSN;
+    //             current->pSSN = index->pSSN;
+    //             index->pSSN = temp;
+                
+    //             temp2 = current->pName;
+    //             current->pName = index->pName;
+    //             index->pName = temp2;
+                
+    //             temp3 = current->gender;
+    //             current->gender = index->gender;
+    //             index->gender = temp3;
+                
+    //             temp4 = current->DOB;
+    //             current->DOB = index->DOB;
+    //             index->DOB = temp4;
+                
+    //             temp5 = current->height;
+    //             current->height = index->height;
+    //             index->height = temp5;
+                
+    //             temp6 = current->weight;
+    //             current->weight = index->weight;
+    //             index->weight = temp6;
+                
+    //             temp7 = current->fSSN;
+    //             current->fSSN = index->fSSN;
+    //             index->fSSN = temp7;
+                
+    //             temp8 = current->mSSN;
+    //             current->mSSN = index->mSSN;
+    //             index->mSSN = temp8;
+    //         index = index->next;
+    //     }
+    //     current = current->next;
+    // }
+    // current = head;
+    // cout << '\n';
+      
+    // while (current->next != NULL)
+    // {  // (current != null) vs. (current->next != NULL)
+    //     prevPerson = current;
+    //     current = current->next;
+    // } 
+    
+    // prevPerson->next = NULL; 
+    // delete newPerson; 
+    // current = head; 
+    
+/********************Ask user for SSN************************************************/
+
+    int usrSSN;
+    cout << "Please enter desird SSN of person to find their uncles, aunts, cousins, nephews and nieces: ";
+    cin >> usrSSN;
+    
+/***********************Find Person*********************************************/
+    long fatherSSN, motherSSN;
+    while (current != NULL) {
+        if (current->pSSN == usrSSN) {
+            personName = current->pName;
+            cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
+        << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
+            
+            fatherSSN = current->fSSN;
+            motherSSN = current->mSSN;
+        
+        cout << "Person found!" << endl;
+        }
+    cout << "Person not found :(" << endl;
+    break;
+   }
+
+/*************************Find Parents of parents*********************************************************/
+
+    long grandfather1SSN, grandmother1SSN, grandfather2SSN, grandmother2SSN;
+    while (current != NULL) {
+        if (current->fSSN == fatherSSN) {
+            cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
+        << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
+            
+            grandfather1SSN = current->fSSN;
+            grandmother1SSN = current->mSSN;
+        
+        cout << "Father found!" << endl;
+        }
+    cout << "Father not found :(" << endl;
+    break;
+   }
+   
+    while (current != NULL) {
+        if (current->mSSN == motherSSN) {
+            cout << current->pName << " | " << current->pSSN << " | " << current->gender << " | " << current->DOB << " | " 
+        << current->height << " | " << current->weight << " | " << current->fSSN << " | "  << current->mSSN << " | " <<  endl ;
+            
+            grandfather2SSN = current->fSSN;
+            grandmother2SSN = current->mSSN;
+        
+        cout << "Mother found!" << endl;
+        }
+    cout << "Mother not found :(" << endl;
+    break;
+   }
+
+/*************************Find Siblings of parents*********************************************************/
+    long uncleSSN1, auntSSN1, uncleSSN2, auntSSN2;
+    while (current != NULL) {
+        if (((current->fSSN == grandfather1SSN) && (current->fSSN != fatherSSN)) || ((current->mSSN == grandmother1SSN) && (current->mSSN != motherSSN))) {
+            
+            uncleSSN1 = current->SSN;
+            cout << personName << " has these uncles on his father's side: " << current->pName << " (" << social_check(head, pcount) << ") " << endl;
+            
+            auntSSN1 = current->SSN;
+            cout << personName << " has these aunts on his father's side: " << current->pName << " (" << social_check(head, pcount) << ") " << endl;
+        
+            if (((current->fSSN == grandfather2SSN) && (current->fSSN != fatherSSN)) || ((current->mSSN == grandmother2SSN) && (current->mSSN != motherSSN))) {
+                
+                uncleSSN2 = current->SSN;
+                cout << personName << " has these uncles on his mother's side: " << current->pName << " (" << social_check(head, pcount) << ") " << endl;
+                
+                auntSSN2 = current->SSN;
+                cout << personName << " has these aunts on his mother's side: " << current->pName << " (" << social_check(head, pcount) << ") " << endl;
+            }
+        }
+    cout << "Aunts and Uncles not found :(" << endl;
+    break;
+   }
+
+/*************************Find Cousins*********************************************************/
+
+long 
+
+
+}
